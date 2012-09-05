@@ -1,9 +1,12 @@
 package com.example.contactlistactivity1;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.R.color;
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,9 +26,12 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 public class ContactAdapter1 extends ArrayAdapter<Contact1> {
-
+	
+	
+	
 	private final List<Contact1> _contacts;
 	private final Activity _context;
+	public int index=0,cnt;
 	//ListView lv;
 
 	public ContactAdapter1(Activity context, List<Contact1> contacts) {
@@ -58,20 +64,34 @@ public class ContactAdapter1 extends ArrayAdapter<Contact1> {
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-
-		View view = null;
-
-		LayoutInflater inflater = _context.getLayoutInflater();
+	
+	public View getView(int position, View convertView, ViewGroup parent) {
+		
+	    ContactListActivity1 con = null;
+	    View view = null;
+	    LayoutInflater inflater = _context.getLayoutInflater();
 		view = inflater.inflate(R.layout.contactlistitem, null);
-	//	lv = (ListView) view.findViewById(R.id.list);
 		final ViewHolder viewHolder = new ViewHolder();
 		viewHolder.text = (TextView) view.findViewById(R.id.txtDisplayName);
 		viewHolder.imageview = (ImageView) view
 				.findViewById(R.id.contact_image);
-		viewHolder.setContact(_contacts.get(position));
+		viewHolder.setContact(_contacts.get(position));		
+		
 		view.setTag(viewHolder);
+	    
+		
+		boolean blnFound = con.invisibilty.contains(position);
+		if(blnFound)
+		{
+		    System.out.println("Disable the position number::" + position);
+		    viewHolder.text.setVisibility(View.INVISIBLE);
+		    viewHolder.imageview.setVisibility(View.INVISIBLE);
+		}
+		
+		//if(invisibilty.get(position)!=position){convertView.setVisibility(View.GONE);}
+		
 		return view;
 	}
+	
 
 }

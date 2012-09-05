@@ -30,6 +30,7 @@ import android.provider.ContactsContract.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -38,7 +39,11 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 
 public class ContactListActivity1 extends ListActivity {
+	
+
 	static ArrayList<String> ids = new ArrayList<String>();
+	static ArrayList<Integer> invisibilty = new ArrayList<Integer>();
+	
 
 	ListView lv;
 
@@ -79,60 +84,71 @@ public class ContactListActivity1 extends ListActivity {
 	//private static int save = -1;
 	int pos = 0;
 	int save = -1;
+	
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		
+		invisibilty.add(position);
+		System.out.println("I want to see the position:"+ invisibilty);
+		v.setVisibility(View.GONE);
+		
+		
 	
-		// v.setBackgroundColor(Color.GRAY);
-		// getListView().setVisibility(View.INVISIBLE);
+		// v.setBackgroundColor(Color.BLUE);
+		// getListView().setVisibility(View.GONE);
 		/*This enables the list to disappear from the list */
-		 v.setVisibility(Color.WHITE);
-		 
-
+		// v.setVisibility(Color.WHITE);
+		// 
 		
 		 System.out.println("position::" +position);
-	//ContactAdapter1 con = null;
-	//con.getItem(position);
+
 		 
-/*
-          if (pos == 0) {
+
+         /* if (pos == 0) {
               if (save != -1) {
-                  l.getChildAt(save).setBackgroundColor(Color.GRAY);
+                  l.getChildAt(save).setBackgroundColor(Color.BLUE);
+                 // v.setVisibility(Color.WHITE);
               }
               save = position;
               System.out.println("save::"+save +"position::" +position);
               pos++;
           //    Log.d("Pos = 0", "Running");
 
-          } *//* else {
-              l.getChildAt(save).setBackgroundColor(Color.);
+          } *//*else {
+              l.getChildAt(save).setBackgroundColor(Color.BLUE);
               save = position;
               pos = 0;
               Log.d("Pos # 0", "Running");
-          }*/
+          } */
 
 	
-        //  if(save == position){l.getChildAt(save).setBackgroundColor(Color.TRANSPARENT);}
+    
 
 		
-			 Object o = this.getListAdapter().getItem(position);
-			 
+			 Object o = this.getListAdapter().getItem(position);			 
 			 Contact1 c = (Contact1) o;		
+			 //ContactAdapter1 con = new ContactAdapter1(null, null) ;
+			  //invisibilty.add(position);
+			// System.out.println("These are the clicked buttons that needs to be disappeared" +con.invisibilty.add(position) );
+			 
 			 
 			// Toast.makeText(this, c.getDisplayName(),
 			// Toast.LENGTH_SHORT).show();
 			
 			 
 			 // Toast.makeText(this, c.getId(), Toast.LENGTH_SHORT).show();
-			 ids.add(c.getDisplayName()); System.out.println("Testing id" +
-			  ids);
+			 ids.add(c.getDisplayName()); 
+			 System.out.println("Testing id" + ids);
 			
 			 
 			 
 		}
-		
+
+	
+	
+
 	
 
 	public void SimpleAlert(View v) { // passing the view object from the
